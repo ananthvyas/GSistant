@@ -28,7 +28,13 @@ void interpret(char* str)
 		launchapp(strs[1].c_str());
 	}else if(strs[0]=="search")
 	{
-		websearch(strs[1].c_str());
+		string term(strs[1]);
+		for(int i=2;i<strs.size();i++)
+		{
+			term+=string(" ");
+			term+=string(strs[i]);
+		}
+		websearch(term.c_str());
 	}
 }
 static void print_hello(GtkWidget* widget, gpointer user_data)

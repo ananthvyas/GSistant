@@ -1,7 +1,8 @@
 #include <gio/gio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <webkit2/webkit2.h>
+#include "WebLibs.h"
 
 void launchapp(const char* path)
 {
@@ -44,6 +45,6 @@ void websearch(const char* text)
 	strcat(str,
 		"http://www.google.com/search?sourceid=navclient&gfns=1&q=");
 	strcat(str,text);
-	launchapp(str);
+	openurl(str);
 	free(str);
 }
