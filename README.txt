@@ -9,3 +9,8 @@ https://developer.gnome.org/gtk3/stable/gtk-getting-started.html
 
 This should be enough to get you started.
 Although GTK+ is supported in Windows, it'll be good to code this in a linux environment to maintain consistency.
+
+Currently supports :
+
+search <phrase>
+open <url/path>
