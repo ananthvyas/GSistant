@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include <webkit2/webkit2.h>
 #include "WebLibs.h"
+#include "FileIndexer.h"
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 
 void launchapp(const char* path)
 {
@@ -23,16 +28,20 @@ void fileopen(char* file)
 	char* str = (char*) malloc(4096*sizeof(char));
 	str[0]='\0';
 	strcat(str,"file://");
-	strcat(str,file);
+	if(boost::starts_with(str,"/"))
+		strcat(str,file);
+	else
+		strcat(str,getPath(file).c_str());
 	launchapp(str);
 	free(str);
 }
 
-void urlopen(char* url)
+void urlopen(const char* url)
 {
 	char* str = (char*) malloc(4096*sizeof(char));
 	str[0]='\0';
-	strcat(str,"http://");
+	if(!boost::starts_with(str,"http:"))
+		strcat(str,"http://");
 	strcat(str,url);
 	launchapp(str);
 	free(str);

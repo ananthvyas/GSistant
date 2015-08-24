@@ -1,7 +1,6 @@
 #include <gtk/gtk.h>
 #include <gio/gio.h>
 #include "TextInterpretor.h"
-#include "FileIndexer.h"
 #include <iostream>
 #include <vector>
 #include <boost/algorithm/string/predicate.hpp>
@@ -25,7 +24,10 @@ void interpret(char* str)
 	boost::split(strs,line,boost::is_any_of(" "));
 	if(strs[0]=="open")
 	{
-		launchapp(strs[1].c_str());
+		if(boost::starts_with(strs[1],"http://") || boost::starts_with(strs[1],"www") || boost::ends_with(strs[1],".com"))
+			urlopen(strs[1].c_str());
+		else
+			fileopen((char*)strs[1].c_str());
 	}else if(strs[0]=="search")
 	{
 		string term(strs[1]);
@@ -47,7 +49,7 @@ static void aloha(GtkWidget* widget, GtkWidget* entry)
 	entry_text=gtk_entry_get_text(GTK_ENTRY(entry));
 	
 	interpret((char*) entry_text);
-	indexHome((char*)"/home/ananth/Downloads");
+	//indexHome((char*)"/home/ananth/Downloads");
 	//cout<<getPath((char*)"theme-118.xml")<<"\n";
 }
 static void button_activate(GtkApplication* app, gpointer user_data)
@@ -76,6 +78,7 @@ int main(int argc, char** argv)
 {
 	GtkApplication* app;
 	int status;
+	indexHome((char*)"/home/ananth/Downloads");
 	app=gtk_application_new("com.gmail.ananth1987.test",G_APPLICATION_FLAGS_NONE);
 	g_signal_connect(app,"activate",G_CALLBACK(button_activate),NULL);
 	status=g_application_run(G_APPLICATION(app),argc,argv);

@@ -22,7 +22,7 @@ void indexHome(char* path)
                                             NULL, &error)) != NULL)
   	{
     	/* Do something with the file info */
-    	//printf("%s/%s\n",path,g_file_info_get_name(info));
+    	printf("%s/%s\n",path,g_file_info_get_name(info));
     	char* newpath=(char*) malloc(sizeof(char)*4096);
     	newpath[0]='\0';
     	strcat(newpath,path);
