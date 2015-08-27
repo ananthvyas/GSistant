@@ -6,6 +6,8 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
+#include <string>
+#include <boost/tokenizer.hpp>
 
 
 static void activate(GtkApplication* app, gpointer user_data)
@@ -37,6 +39,25 @@ void interpret(char* str)
 			term+=string(strs[i]);
 		}
 		websearch(term.c_str());
+	}else if(strs[0]=="drive")
+	{
+		std::string s = string(str);
+		std::string delimiter = " from ";
+		std::string from,to;
+		size_t pos = 0;
+		std::string token;
+		pos = s.find(delimiter);
+    	token = s.substr(0, pos);
+    	std::cout << token << std::endl;
+    	s.erase(0, pos + delimiter.length());
+		
+		delimiter=" to ";
+		while ((pos = s.find(delimiter)) != std::string::npos) {
+    		from = s.substr(0, pos);
+    		s.erase(0, pos + delimiter.length());
+		}
+		to=s;
+		maps(from.c_str(),to.c_str());
 	}
 }
 static void print_hello(GtkWidget* widget, gpointer user_data)
