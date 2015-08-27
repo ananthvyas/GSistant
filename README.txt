@@ -14,4 +14,5 @@ Although GTK+ is supported in Windows, it'll be good to code this in a linux env
 Currently supports :
 
 search <phrase>
-open <url/path>
+open <url/path/filename>
+drive from <source> to <dest>
