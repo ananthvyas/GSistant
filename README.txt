@@ -2,7 +2,8 @@ README for the GSistant project.
 
 To compile the project, use this command :
 
-g++ -std=c++11 GSistant.cpp -o GSistant `pkg-config --cflags --libs gtk+-3.0`
+g++ -std=c++11 GSistant.cpp -o GSistant `pkg-config --cflags --libs gtk+-3.0 webkit2gtk-4.0` -lboost_regex
+
 GTK+ is installed by default in GNOME systems.
 Basic information about the GTK+ library can be seen here :
 https://developer.gnome.org/gtk3/stable/gtk-getting-started.html
